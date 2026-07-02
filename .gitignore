@@ -1,0 +1,14 @@
+# Backup archives
+*.zip
+*.wpress
+*.sql
+*.gz
+*.tar
+*.bak
+
+# Backup plugins
+wp-content/backup-migration/backups/
+wp-content/updraft/
+
+# Logs
+*.log
