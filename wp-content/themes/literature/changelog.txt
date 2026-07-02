@@ -1,0 +1,22 @@
+Version: 1.3.0
+    Added:
+        - TrxAddons: WooCommerce Product Filter Widget: added item filtering for large lists with more than 15 items and scrollable attribute lists in the sidebar.
+        - TrxAddons: added handlers for displaying library templates when creating 'woo-template' posts in ThemeREX WooCommerce Extension.
+        - TrxAddons: added support for "word-to-site-ai" WaaS service keys.
+        - Added compatibility with Elementor Pro product tabs.
+        - Added theme options update when importing ThemeREX WooCommerce Extension templates from the library.
+
+Version: 1.2.0
+    Added:
+        - Full compatibility with WordPress 7.0 and later.
+        - Full compatibility with the Elementor V4 builder.
+        - Support for Elementor V4 Atomic widgets.
+        - New "Atomic" demo built entirely with Atomic widgets.
+        - New set of 100% Atomic templates added to the ThemeREX Template Library.
+        - Full support for the Advanced WooCommerce plugin, including its advanced WooCommerce widgets.
+
+Version: 1.1.0
+    Added:
+        - Added Compare support for the "ThemeRex WooCommerce Extension" plugin.
+
+Release: v.1.0.0

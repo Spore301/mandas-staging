@@ -1,0 +1,3837 @@
+/*
+Theme Name: Literature Child Theme
+Theme URI: https://literature.axiomthemes.com/
+Description: Literature is a Premium WordPress theme that has built-in support for popular Page Builders, slider with swipe gestures, and is SEO- and Retina-ready. The unique system of inheritance and override options allows setting up individual parameters for different sections of your site and supported plugins.
+Author: AxiomThemes
+Author URI: https://axiomthemes.com/
+Version: 1.3.0
+Tested up to: 6.9
+Requires at least: 5.5
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: blog, e-commerce, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, custom-background, custom-colors, custom-header, custom-logo, custom-menu, editor-style, featured-image-header, featured-images, flexible-header, footer-widgets, full-width-template, microformats, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
+Text Domain: literature
+Template: literature
+*/
+
+
+/* =Child-Theme customization starts here
+------------------------------------------------------------ */
+
+/* ==========================================================================
+   GLOBAL TYPOGRAPHY RULES (FONT OVERRIDES)
+   ========================================================================== */
+
+/* 1. Headers: English in Cormorant Garamond, Bengali in Ruposhi Bangla UI Uni */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.woocommerce-loop-product__title,
+.woocommerce-loop-product__title a,
+.product_title,
+.entry-title,
+.entry-title a,
+.post_title,
+.post_title a,
+.title,
+.title a {
+    font-family: "Cormorant Garamond", "Ruposhi Bangla UI Uni", "Ruposhi", "Kalpurush", serif !important;
+}
+
+/* 2. Body Text: DM Sans with Bengali fallbacks */
+body,
+p,
+li,
+td,
+th,
+input,
+textarea,
+select,
+button,
+label,
+.woocommerce-breadcrumb,
+.price,
+.price *,
+.product-short-description,
+.woocommerce-Tabs-panel,
+.woocommerce-Tabs-panel p,
+.comment-respond,
+.comment-form * {
+    font-family: "DM Sans", "Ruposhi Bangla UI Uni", "Ruposhi", "Kalpurush", sans-serif !important;
+}
+
+/* WooCommerce Info Banner Styling */
+.woocommerce-info {
+    background-color: #f7e9d0 !important;
+    color: #1d1b18 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    border-top: 0px !important;
+}
+
+/* Ensure text and links in the banner have contrast */
+.woocommerce-info,
+.woocommerce-info a:not(.button) {
+    color: #1d1b18 !important;
+}
+
+/* WooCommerce Button inside Info Banner */
+.woocommerce-info .button,
+.woocommerce-info a.button,
+.woocommerce-info .woocommerce-Button,
+.woocommerce-info .wc-forward {
+    background-color: #1d1b18 !important;
+    color: #f7e9d0 !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    border: 1px solid #1d1b18 !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Button Hover State */
+.woocommerce-info .button:hover,
+.woocommerce-info a.button:hover,
+.woocommerce-info .woocommerce-Button:hover,
+.woocommerce-info .wc-forward:hover {
+    background-color: #3d3d3d !important;
+    border-color: #3d3d3d !important;
+    color: #f7e9d0 !important;
+}
+
+
+/* ==========================================================================
+   CUSTOM PRODUCT CARD DESIGN (WIREFRAME STYLING)
+   ========================================================================== */
+
+/* 1. Main Grid List Overrides */
+ul.products {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    /* 4 columns on desktop */
+    gap: 30px !important;
+    align-items: stretch !important;
+    /* Stretch card wrappers to equal heights in each row */
+}
+
+@media (max-width: 1200px) {
+    ul.products {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+
+@media (max-width: 900px) {
+    ul.products {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    ul.products {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+}
+
+ul.products::before,
+ul.products::after {
+    display: none !important;
+    /* Remove float clearing elements that break CSS grid */
+}
+
+/* 2. Product Card Wrapper */
+.woocommerce ul.products[class*="columns-"] li.product,
+.woocommerce-page ul.products[class*="columns-"] li.product,
+ul.products li.product {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    float: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    /* Support column stretching */
+    height: 100% !important;
+}
+
+ul.products li.product .post_item {
+    background-color: #f7e9d0 !important;
+    /* Warm Cream background */
+    border: 1px solid rgba(29, 27, 24, 0.1) !important;
+    border-radius: 20px !important;
+    /* Rounded corners */
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 100% !important;
+    /* Fill parent height */
+    flex-grow: 1 !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Hover effect on card */
+ul.products li.product .post_item:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 15px 30px rgba(29, 27, 24, 0.08) !important;
+    border-color: rgba(29, 27, 24, 0.2) !important;
+}
+
+/* 3. Image Section (Top) */
+ul.products li.product .post_featured {
+    position: relative !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 19px 19px 0 0 !important;
+    overflow: hidden !important;
+    background-color: transparent !important;
+    aspect-ratio: 1 / 1.4142 !important;
+    /* A4 aspect ratio */
+    height: auto !important;
+}
+
+ul.products li.product .post_featured a {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+ul.products li.product .post_featured img {
+    width: 100% !important;
+    height: 100% !important;
+    /* Fill container height */
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+ul.products li.product .post_item:hover .post_featured img {
+    transform: scale(1.04) !important;
+}
+
+/* 4. Sale Badge */
+ul.products li.product span.onsale {
+    position: absolute !important;
+    top: 15px !important;
+    left: 15px !important;
+    background-color: #ffffff !important;
+    /* White pill background */
+    color: #1d1b18 !important;
+    /* Dark text */
+    border: 1px solid rgba(29, 27, 24, 0.15) !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding: 4px 12px !important;
+    border-radius: 20px !important;
+    margin: 0 !important;
+    min-height: auto !important;
+    min-width: auto !important;
+    line-height: 1.4 !important;
+    z-index: 10 !important;
+}
+
+/* 5. Wishlist Button (Top Right corner placement) */
+ul.products li.product .yith-wcwl-add-to-wishlist,
+ul.products li.product .yith-wcwl-add-button {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    margin: 0 !important;
+    z-index: 10 !important;
+}
+
+/* 6. Content Section (Bottom) */
+ul.products li.product .post_data {
+    padding: 24px 20px 20px 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    background-color: transparent !important;
+}
+
+ul.products li.product .post_data_inner {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    /* Title left, Price right */
+    grid-template-rows: auto 1fr auto auto !important;
+    /* 4 rows to support stars */
+    /* 1fr middle row absorbs vertical space to push buttons down */
+    row-gap: 15px !important;
+    column-gap: 10px !important;
+    align-items: start !important;
+    width: 100% !important;
+    flex-grow: 1 !important;
+    /* Forces grid to expand and match card height */
+}
+
+/* Product Title */
+ul.products li.product .post_header.entry-header {
+    grid-column: 1 / 2 !important;
+    grid-row: 1 / 2 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+ul.products li.product h2.woocommerce-loop-product__title {
+    font-family: "Ruposhi Bangla UI Uni", sans-serif !important;
+    font-size: 1.35rem !important;
+    font-weight: 700 !important;
+    /* Bold */
+    line-height: 1.25 !important;
+    color: #1d1b18 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+
+    /* Clamp to exactly 2 lines with ellipsis truncation */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    height: 2.5em !important;
+    /* line-height (1.25) * 2 */
+}
+
+ul.products li.product h2.woocommerce-loop-product__title a {
+    font-family: "Ruposhi Bangla UI Uni", sans-serif !important;
+    color: #1d1b18 !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+}
+
+ul.products li.product h2.woocommerce-loop-product__title a:hover {
+    color: #d41f22 !important;
+    /* Theme red on hover */
+}
+
+/* Price Section */
+ul.products li.product .price {
+    grid-column: 2 / 3 !important;
+    grid-row: 1 / 2 !important;
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    /* Sale price on top, original price below it */
+    align-items: flex-end !important;
+    text-align: right !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 1.15rem !important;
+    color: #1d1b18 !important;
+    margin: 0 !important;
+}
+
+/* Current / Sale Price */
+ul.products li.product .price ins,
+ul.products li.product .price>.amount {
+    color: #d41f22 !important;
+    /* Theme red for sale price */
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+/* Original Struck-out Price */
+ul.products li.product .price del {
+    color: #8a8a8a !important;
+    font-size: 0.85rem !important;
+    font-weight: 400 !important;
+    margin-top: 2px !important;
+    display: block !important;
+}
+
+/* Attribute Section (Author/Cover) */
+ul.products li.product .product_meta_custom,
+ul.products li.product .post_tags {
+    grid-column: 1 / 3 !important;
+    grid-row: 2 / 3 !important;
+    display: flex !important;
+    gap: 15px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 12px !important;
+    color: #8a8a8a !important;
+}
+
+/* Grouped Categories and Short Description vertically stacked and left-aligned */
+ul.products li.product .product-card-meta-wrap,
+.trx-addons-woo-products-carousel .product-card-meta-wrap {
+    grid-column: 1 / 3 !important;
+    grid-row: 2 / 3 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    width: 100% !important;
+    margin-top: 8px !important;
+}
+
+/* Hide default carousel category to avoid duplicates */
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product-category {
+    display: none !important;
+}
+
+ul.products li.product .product-card-meta-wrap .product_categories,
+.trx-addons-woo-products-carousel .product-card-meta-wrap .product_categories {
+    display: block !important;
+    width: 100% !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+ul.products li.product .product-card-meta-wrap .product_categories a,
+.trx-addons-woo-products-carousel .product-card-meta-wrap .product_categories a {
+    font-family: "Ruposhi Bangla UI Uni", sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    color: #8a8a8a !important;
+}
+
+ul.products li.product .product-card-meta-wrap .product_categories a.category-is-english,
+.trx-addons-woo-products-carousel .product-card-meta-wrap .product_categories a.category-is-english {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    text-transform: none !important;
+}
+
+ul.products li.product .product-card-meta-wrap .product-short-description,
+.trx-addons-woo-products-carousel .product-card-meta-wrap .product-short-description {
+    display: block !important;
+    width: 100% !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    text-align: left !important;
+}
+
+/* Meta Labels Styling */
+.product-card-meta-wrap .meta-label {
+    color: #464036 !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+}
+
+/* Render first paragraph inline to stay beside the label */
+.product-card-meta-wrap .product-short-description p:first-of-type {
+    display: inline !important;
+}
+
+/* Render other paragraphs as block to stack them below the first line */
+.product-card-meta-wrap .product-short-description p:not(:first-of-type) {
+    display: block !important;
+    margin-top: 4px !important;
+}
+
+.product-card-meta-wrap .product-short-description.short-desc-is-bengali p {
+    font-family: "Ruposhi Bangla UI Uni", sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 1.4 !important;
+    color: #8a8a8a !important;
+    margin: 0 !important;
+}
+
+.product-card-meta-wrap .product-short-description.short-desc-is-english p {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    line-height: 1.4 !important;
+    color: #8a8a8a !important;
+    margin: 0 !important;
+}
+
+/* 7. Action Buttons (Bottom) */
+/* Standard star rating placement */
+ul.products li.product .star-rating,
+ul.products li.product .woocommerce-product-rating {
+    grid-column: 1 / 3 !important;
+    grid-row: 3 / 4 !important;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    justify-self: center !important;
+}
+
+ul.products li.product .add_to_cart_wrap {
+    grid-column: 1 / 3 !important;
+    grid-row: 4 / 5 !important;
+    width: 100% !important;
+    margin-top: 5px !important;
+    display: flex !important;
+    gap: 10px !important;
+}
+
+/* Buy Now Button */
+ul.products li.product .add_to_cart_wrap a.button {
+    flex-grow: 1 !important;
+    background-color: #1d1b18 !important;
+    /* Dark button background */
+    color: #f7e9d0 !important;
+    /* Warm cream text */
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: none !important;
+    padding: 12px 24px !important;
+    border-radius: 12px !important;
+    /* 12px corner radius */
+    border: 1px solid #1d1b18 !important;
+    text-align: center !important;
+    line-height: 1 !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Buy Now Button Hover */
+ul.products li.product .add_to_cart_wrap a.button:hover {
+    background-color: #3d3d3d !important;
+    border-color: #3d3d3d !important;
+    color: #ffffff !important;
+}
+
+/* Product Categories (Visible below the title) */
+ul.products li.product .product_categories {
+    font-family: "Ruposhi Bangla UI Uni", sans-serif !important;
+    font-size: 16px !important;
+    /* Increased font size to 16px */
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    color: #8a8a8a !important;
+    /* Muted grey */
+    margin-top: 8px !important;
+    /* Margin top to separate from title above */
+    margin-bottom: 0 !important;
+    text-align: left !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+ul.products li.product .product_categories a {
+    font-family: "Ruposhi Bangla UI Uni", sans-serif !important;
+    font-size: 16px !important;
+    /* Increased font size to 16px */
+    color: #8a8a8a !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+}
+
+ul.products li.product .product_categories a:hover {
+    color: #d41f22 !important;
+    /* Accent red hover */
+}
+
+/* 8. English-Specific Typography Overrides */
+
+/* English Title Styling (Cormorant Garamond Semibold) */
+ul.products li.product h2.woocommerce-loop-product__title span.title-is-english,
+ul.products li.product h2.woocommerce-loop-product__title span.title-is-english a,
+ul.products li.product h2.woocommerce-loop-product__title a span.title-is-english {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-weight: 600 !important;
+    /* Semibold */
+    font-size: 1.45rem !important;
+    /* Slightly scaled up to match visual weight of Ruposhi font */
+}
+
+/* English Category Styling (Cormorant Garamond Semibold) */
+ul.products li.product .product_categories a.category-is-english {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-weight: 600 !important;
+    /* Semibold */
+    font-size: 15px !important;
+    /* Match title styling scaling */
+    text-transform: none !important;
+    /* Keep original casing for English category terms */
+}
+
+/* ==========================================================================
+   HUSKY PRODUCT FILTERS SIDEBAR STYLING
+   ========================================================================== */
+
+/* 1. Price Range Slider (Ion.RangeSlider) Styling */
+
+/* Selected Range Highlight Line */
+.irs--round .irs-bar {
+    background-color: #1d1b18 !important;
+}
+
+/* Drag Handles (Knobs) */
+.irs--round .irs-handle {
+    border: 3px solid #1d1b18 !important;
+    background-color: #f7e9d0 !important;
+    /* Matches warm cream card background */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    cursor: pointer !important;
+}
+
+.irs--round .irs-handle:hover,
+.irs--round .irs-handle.state_hover {
+    background-color: #1d1b18 !important;
+}
+
+/* Background Track */
+.irs--round .irs-line {
+    background-color: rgba(29, 27, 24, 0.1) !important;
+    border-radius: 4px !important;
+}
+
+/* Value Labels (Popup tags above slider) */
+.irs--round .irs-from,
+.irs--round .irs-to,
+.irs--round .irs-single {
+    background-color: #1d1b18 !important;
+    color: #f7e9d0 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    border-radius: 4px !important;
+    padding: 3px 7px !important;
+}
+
+/* Little triangle pointing down on labels */
+.irs--round .irs-from::before,
+.irs--round .irs-to::before,
+.irs--round .irs-single::before {
+    border-top-color: #1d1b18 !important;
+}
+
+/* Scale Grid markings/text below slider */
+.irs--round .irs-grid-text {
+    color: #8a8a8a !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 10px !important;
+}
+
+.irs--round .irs-grid-pol {
+    background-color: rgba(29, 27, 24, 0.15) !important;
+}
+
+/* 2. Premium Checkbox Styling (Replacing HUSKY iCheck blue skin image sprites with CSS) */
+.icheckbox_square-blue {
+    background: #f7e9d0 !important;
+    /* Warm cream */
+    border: 1px solid rgba(29, 27, 24, 0.3) !important;
+    border-radius: 4px !important;
+    width: 18px !important;
+    height: 18px !important;
+    position: relative !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+}
+
+.icheckbox_square-blue.checked {
+    background: #1d1b18 !important;
+    /* Espresso when checked */
+    border-color: #1d1b18 !important;
+}
+
+/* Draw custom checkmark via borders on checked state */
+.icheckbox_square-blue.checked::after {
+    content: '' !important;
+    position: absolute !important;
+    left: 5px !important;
+    top: 2px !important;
+    width: 5px !important;
+    height: 9px !important;
+    border: solid #f7e9d0 !important;
+    border-width: 0 2px 2px 0 !important;
+    transform: rotate(45deg) !important;
+}
+
+/* Hover transitions */
+.icheckbox_square-blue:hover {
+    border-color: #1d1b18 !important;
+}
+
+/* Checkbox Labels styling */
+.woof_container_stock label,
+.woof_container_onsales label {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important;
+    color: #1d1b18 !important;
+    vertical-align: middle !important;
+    cursor: pointer !important;
+}
+
+/* 3. Text Search Field Styling */
+.woof_husky_txt-input {
+    background: #f7e9d0 !important;
+    border: 1px solid rgba(29, 27, 24, 0.2) !important;
+    border-radius: 12px !important;
+    color: #1d1b18 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important;
+    padding: 10px 15px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s ease !important;
+}
+
+.woof_husky_txt-input:focus {
+    border-color: #1d1b18 !important;
+    outline: none !important;
+}
+
+/* 4. Chosen Select Dropdowns Override (Category/Tag Selectors) */
+.chosen-container-single .chosen-single {
+    background: #f7e9d0 !important;
+    border: 1px solid rgba(29, 27, 24, 0.2) !important;
+    border-radius: 12px !important;
+    /* Match rounded buttons */
+    color: #1d1b18 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important;
+    padding: 10px 15px !important;
+    height: auto !important;
+    line-height: 1.2 !important;
+    box-shadow: none !important;
+    transition: border-color 0.2s ease !important;
+}
+
+.chosen-container-active .chosen-single,
+.chosen-container-single .chosen-single:focus {
+    border-color: #1d1b18 !important;
+}
+
+.chosen-container-single .chosen-single div b {
+    background-position: 0 9px !important;
+    /* Shift arrow position down slightly for alignment */
+}
+
+.chosen-container .chosen-drop {
+    background: #f7e9d0 !important;
+    border: 1px solid rgba(29, 27, 24, 0.2) !important;
+    border-radius: 0 0 12px 12px !important;
+    box-shadow: 0 8px 24px rgba(29, 27, 24, 0.08) !important;
+}
+
+.chosen-container .chosen-results li.highlighted {
+    background-color: #1d1b18 !important;
+    color: #f7e9d0 !important;
+}
+
+.chosen-container .chosen-results li {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important;
+    padding: 8px 15px !important;
+}
+
+/* Multi-select styling */
+.chosen-container-multi .chosen-choices {
+    background: #f7e9d0 !important;
+    border: 1px solid rgba(29, 27, 24, 0.2) !important;
+    border-radius: 12px !important;
+    padding: 6px 12px !important;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice {
+    background: #1d1b18 !important;
+    color: #f7e9d0 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 12px !important;
+    padding: 4px 20px 4px 8px !important;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+    background-position: -42px -10px !important;
+}
+
+/* 5. Headings Inside Filter block */
+.woof_container h4 {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    font-size: 1.25rem !important;
+    margin-top: 10px !important;
+    margin-bottom: 12px !important;
+    border-bottom: 1px solid rgba(29, 27, 24, 0.1) !important;
+    padding-bottom: 8px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* 6. Filter Form Reset Button */
+.woof_submit_search_form_container {
+    margin-top: 25px !important;
+}
+
+.woof_reset_search_form {
+    background-color: #1d1b18 !important;
+    /* Espresso button */
+    color: #f7e9d0 !important;
+    /* Warm Cream text */
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    padding: 12px 24px !important;
+    border-radius: 12px !important;
+    border: 1px solid #1d1b18 !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    display: inline-block !important;
+    width: 100% !important;
+    /* Full width button */
+    text-align: center !important;
+}
+
+.woof_reset_search_form:hover {
+    background-color: #3d3d3d !important;
+    border-color: #3d3d3d !important;
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
+   1. SWIPER WIDTH CALCULATION BUG FIX (PREVENTS 8.3E6PX STRETCHING)
+   ========================================================================== */
+/* If a products list contains a carousel, do not display it as a grid */
+.elementor-widget-trx_addons_woo_products_carousel ul.products,
+.trx-addons-woo-products-carousel-wrap ul.products,
+ul.products:has(.trx-addons-swiper-slider),
+ul.products:has(.swiper-container),
+ul.products:has(.swiper) {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.trx-addons-swiper-slider,
+.swiper-container,
+.swiper {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    /* Prevents slide content bleeding */
+}
+
+.trx-addons-swiper-slider .swiper-wrapper {
+    min-width: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+    align-items: stretch !important;
+    /* Forces all slides to have the same height */
+}
+
+.trx-addons-swiper-slider .swiper-slide {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    height: auto !important;
+    /* Allows flex stretching to determine equal height */
+    flex-shrink: 0 !important;
+    /* Prevents slides from squeezing */
+    padding-left: 10px !important;
+    /* 10px left + 10px right = 20px gap between cards */
+    padding-right: 10px !important;
+    box-sizing: border-box !important;
+}
+
+/* Prevent flex container parents from expanding infinitely */
+.elementor-widget-trx_sc_services,
+.elementor-widget-trx_addons_woo_products_carousel,
+.elementor-column-wrap,
+.elementor-widget-wrap,
+.e-con {
+    min-width: 0 !important;
+}
+
+
+/* ==========================================================================
+   2. TRX ADDONS CAROUSEL PRODUCT CARD STYLING (MATCHING THE STYLE.CSS GRID)
+   ========================================================================== */
+
+/* Remove default list item bullet styling inside slides */
+.trx-addons-woo-products-carousel li.product {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+}
+
+/* Product Card Wrapper (Matches style.css card background & shadows) */
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product-wrapper {
+    background-color: #f7e9d0 !important;
+    /* Warm Cream background */
+    border: 1px solid rgba(29, 27, 24, 0.1) !important;
+    border-radius: 20px !important;
+    /* Rounded corners */
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 100% !important;
+    flex-grow: 1 !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Hover Translate-Up Animation */
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product-wrapper:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 15px 30px rgba(29, 27, 24, 0.08) !important;
+    border-color: rgba(29, 27, 24, 0.2) !important;
+}
+
+/* Image Section (Matches the 440px Tall Book Cover Aspect Ratio) */
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product-thumbnail {
+    position: relative !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 19px 19px 0 0 !important;
+    overflow: hidden !important;
+    background-color: transparent !important;
+    aspect-ratio: 1 / 1.4142 !important;
+    /* A4 aspect ratio */
+    height: auto !important;
+}
+
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product-thumbnail a {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product-thumbnail img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* Image Zoom Hover Animation */
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product-wrapper:hover .trx-addons-woo-products-product-thumbnail img {
+    transform: scale(1.04) !important;
+}
+
+
+
+/* Sale Badge */
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product-onsale {
+    position: absolute !important;
+    top: 15px !important;
+    left: 15px !important;
+    background-color: #ffffff !important;
+    color: #1d1b18 !important;
+    border: 1px solid rgba(29, 27, 24, 0.15) !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding: 4px 12px !important;
+    border-radius: 20px !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+    z-index: 10 !important;
+}
+
+.trx-addons-woo-products-carousel .trx-addons-woo-products-ribbon-container {
+    position: static !important;
+}
+
+/* Details Section Layout */
+.trx-addons-woo-products-carousel .trx-addons-woo-products-details-wrap {
+    padding: 24px 20px 20px 20px !important;
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    /* Title left, Price right */
+    grid-template-rows: auto 1fr auto auto !important;
+    /* 4 rows to support stars */
+    /* Middle row stretches to align buttons */
+    row-gap: 15px !important;
+    column-gap: 10px !important;
+    align-items: start !important;
+    width: 100% !important;
+    flex-grow: 1 !important;
+    background-color: transparent !important;
+}
+
+/* Product Title */
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product__link {
+    grid-column: 1 / 2 !important;
+    grid-row: 1 / 2 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-decoration: none !important;
+}
+
+.trx-addons-woo-products-carousel h5.woocommerce-loop-product__title {
+    font-family: "Ruposhi Bangla UI Uni", sans-serif !important;
+    font-size: 1.35rem !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    color: #1d1b18 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+
+    /* Clamp to exactly 2 lines with ellipsis truncation */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    height: 2.5em !important;
+    /* line-height (1.25) * 2 */
+}
+
+.trx-addons-woo-products-carousel h5.woocommerce-loop-product__title a {
+    color: #1d1b18 !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+}
+
+.trx-addons-woo-products-carousel h5.woocommerce-loop-product__title a:hover {
+    color: #d41f22 !important;
+    /* Theme Red Hover */
+}
+
+/* Price Placement */
+.trx-addons-woo-products-carousel .price {
+    grid-column: 2 / 3 !important;
+    grid-row: 1 / 2 !important;
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    align-items: flex-end !important;
+    text-align: right !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 1.15rem !important;
+    color: #1d1b18 !important;
+    margin: 0 !important;
+}
+
+.trx-addons-woo-products-carousel .price ins,
+.trx-addons-woo-products-carousel .price>.amount {
+    color: #d41f22 !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+.trx-addons-woo-products-carousel .price del {
+    color: #8a8a8a !important;
+    font-size: 0.85rem !important;
+    font-weight: 400 !important;
+    margin-top: 2px !important;
+    display: block !important;
+}
+
+/* Category styling */
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product-category {
+    grid-column: 1 / 3 !important;
+    grid-row: 2 / 3 !important;
+    font-family: "Ruposhi Bangla UI Uni", sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    color: #8a8a8a !important;
+    margin-top: 8px !important;
+    margin-bottom: 0 !important;
+    text-align: left !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+/* Action Buttons Wrapper (Buy Now) */
+/* Carousel star rating placement */
+.trx-addons-woo-products-carousel .star-rating,
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product-rating {
+    grid-column: 1 / 3 !important;
+    grid-row: 3 / 4 !important;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    justify-self: center !important;
+}
+
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product-actions-wrapper {
+    grid-column: 1 / 3 !important;
+    grid-row: 4 / 5 !important;
+    width: 100% !important;
+    margin-top: 5px !important;
+}
+
+.trx-addons-woo-products-carousel .trx-addons-woo-products-atc-button {
+    width: 100% !important;
+    display: flex !important;
+}
+
+.trx-addons-woo-products-carousel .add_to_cart_wrap {
+    width: 100% !important;
+    display: flex !important;
+}
+
+.trx-addons-woo-products-carousel .add_to_cart_wrap a.button {
+    flex-grow: 1 !important;
+    background-color: #1d1b18 !important;
+    /* Espresso button background */
+    color: #f7e9d0 !important;
+    /* Warm Cream text */
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: none !important;
+    padding: 12px 24px !important;
+    border-radius: 12px !important;
+    border: 1px solid #1d1b18 !important;
+    text-align: center !important;
+    line-height: 1.4 !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.trx-addons-woo-products-carousel .add_to_cart_wrap a.button:hover {
+    background-color: #3d3d3d !important;
+    border-color: #3d3d3d !important;
+    color: #ffffff !important;
+}
+
+/* 10. English-Specific Typography Overrides */
+.trx-addons-woo-products-carousel h5.woocommerce-loop-product__title span.title-is-english,
+.trx-addons-woo-products-carousel h5.woocommerce-loop-product__title span.title-is-english a,
+.trx-addons-woo-products-carousel h5.woocommerce-loop-product__title a span.title-is-english {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-weight: 600 !important;
+    font-size: 1.45rem !important;
+}
+
+.trx-addons-woo-products-carousel .trx-addons-woo-products-product-category span.category-is-english {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    text-transform: none !important;
+}
+
+/* ==========================================================================
+   3. MOBILE RESPONSIVENESS AND COLLISION PREVENTIONS
+   ========================================================================== */
+
+/* Tablet & Mobile Slide Spacing adjustments */
+@media (max-width: 768px) {
+    .trx-addons-swiper-slider .swiper-slide {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .trx-addons-swiper-slider .swiper-wrapper {
+        margin-left: -8px !important;
+        margin-right: -8px !important;
+    }
+}
+
+/* Mobile Portrait details section stack (prevents title & price collisions) */
+@media (max-width: 480px) {
+
+    /* Standard Product Grid overrides */
+    ul.products li.product .post_data {
+        padding: 16px 15px 15px 15px !important;
+    }
+
+    ul.products li.product .post_data_inner {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    ul.products li.product .post_header.entry-header {
+        order: 1 !important;
+    }
+
+    ul.products li.product .product-card-meta-wrap {
+        order: 2 !important;
+        flex-wrap: wrap !important;
+        margin-top: 0 !important;
+    }
+
+    ul.products li.product .price {
+        order: 3 !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        flex-direction: row-reverse !important;
+        justify-content: flex-end !important;
+        gap: 8px !important;
+        font-size: 1.1rem !important;
+        width: 100% !important;
+    }
+
+    ul.products li.product .price del {
+        margin-top: 0 !important;
+        display: inline-block !important;
+    }
+
+    ul.products li.product .add_to_cart_wrap {
+        order: 4 !important;
+        margin-top: 5px !important;
+    }
+
+    /* TRX Addons Carousel overrides */
+    .trx-addons-woo-products-carousel .trx-addons-woo-products-details-wrap {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        padding: 16px 15px 15px 15px !important;
+    }
+
+    .trx-addons-woo-products-carousel .trx-addons-woo-products-product__link {
+        order: 1 !important;
+    }
+
+    .trx-addons-woo-products-carousel .product-card-meta-wrap {
+        order: 2 !important;
+        flex-wrap: wrap !important;
+        margin-top: 0 !important;
+    }
+
+    .trx-addons-woo-products-carousel .price {
+        order: 3 !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        flex-direction: row-reverse !important;
+        justify-content: flex-end !important;
+        gap: 8px !important;
+        font-size: 1.1rem !important;
+        width: 100% !important;
+    }
+
+    .trx-addons-woo-products-carousel .price del {
+        margin-top: 0 !important;
+        display: inline-block !important;
+    }
+
+    .trx-addons-woo-products-carousel .trx-addons-woo-products-product-actions-wrapper {
+        order: 4 !important;
+        margin-top: 5px !important;
+    }
+}
+
+/* ==========================================================================
+   WOOF PRODUCTS FILTER ACTIVE PANELS STYLING
+   ========================================================================== */
+.woof_products_top_panel {
+    display: block !important;
+    width: 100% !important;
+    margin: 15px 0 25px 0 !important;
+    padding: 0 !important;
+}
+
+.woof_products_top_panel_ul {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 15px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.woof_products_top_panel_ul>li {
+    display: inline-block !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Clear All Button */
+.woof_reset_button_2 {
+    background-color: #1d1b18 !important;
+    /* Espresso background */
+    color: #f7e9d0 !important;
+    /* Warm Cream text */
+    border: 1px solid #1d1b18 !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    padding: 6px 16px !important;
+    border-radius: 20px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.woof_reset_button_2:hover {
+    background-color: #d41f22 !important;
+    /* Accent Red on hover */
+    border-color: #d41f22 !important;
+    color: #ffffff !important;
+}
+
+/* Active filter list container */
+.woof_products_top_panel_ul ul {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.woof_products_top_panel_ul ul li {
+    display: inline-block !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* "Product categories:" label text */
+.woof_products_top_panel_ul ul li:first-of-type {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: #464036 !important;
+    /* Premium brand title color */
+}
+
+/* Active Filter Pill / Tag Link */
+.woof_products_top_panel_ul ul li a {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 6px 14px !important;
+    background-color: #f7e9d0 !important;
+    /* Warm Cream background */
+    border: 1px solid rgba(29, 27, 24, 0.15) !important;
+    border-radius: 20px !important;
+    color: #1d1b18 !important;
+    text-decoration: none !important;
+    font-family: "Ruposhi Bangla UI Uni", sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Add custom "×" close icon after the tag value */
+.woof_products_top_panel_ul ul li a::after {
+    content: "×" !important;
+    margin-left: 8px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #d41f22 !important;
+    /* Theme red close indicator */
+    line-height: 1 !important;
+    transition: color 0.2s ease !important;
+}
+
+.woof_products_top_panel_ul ul li a:hover {
+    border-color: #d41f22 !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(212, 31, 34, 0.05) !important;
+}
+
+.woof_products_top_panel_ul ul li a:hover::after {
+    color: #1d1b18 !important;
+}
+
+/* Hide standard background image/close icon from plugin if any exists */
+.woof_remove_ppi {
+    background: none !important;
+    padding-left: 0 !important;
+    display: inline !important;
+}
+
+/* ==========================================================================
+   SINGLE PRODUCT PAGE STYLING (SSP) - MANDAS PUBLICATION
+   ========================================================================== */
+
+/* Page Padding */
+.single-product .page_content_wrap {
+    padding-top: 50px !important;
+    /* Gap from the navbar */
+    padding-left: 80px !important;
+    padding-right: 80px !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 767px) {
+    .single-product .page_content_wrap {
+        padding-top: 30px !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
+
+/* 1. Breadcrumbs Styling */
+.single-product nav.woocommerce-breadcrumb {
+    font-family: "DM Sans", "Ruposhi Bangla UI Uni", "Ruposhi", "Kalpurush", sans-serif !important;
+    font-size: 14px !important;
+    color: #8a8a8a !important;
+    margin-bottom: 40px !important;
+    display: block !important;
+}
+
+.single-product nav.woocommerce-breadcrumb a {
+    color: #8a8a8a !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+    font-weight: 500 !important;
+}
+
+.single-product nav.woocommerce-breadcrumb a:hover {
+    color: #d41f22 !important;
+    /* Theme Accent Red */
+}
+
+.single-product nav.woocommerce-breadcrumb .woocommerce-breadcrumb-delimiter {
+    margin: 0 10px !important;
+    color: rgba(29, 27, 24, 0.3) !important;
+    display: inline-block !important;
+}
+
+.single-product nav.woocommerce-breadcrumb .woocommerce-breadcrumb-delimiter::before {
+    content: "/" !important;
+}
+
+/* 2. Main Product Grid Layout (Desktop) */
+.single-product .post_item_single .product {
+    display: grid !important;
+    grid-template-columns: 4.5fr 5.5fr !important;
+    /* Left: Gallery, Right: Details */
+    gap: 60px !important;
+    margin-bottom: 80px !important;
+    align-items: start !important;
+    position: relative !important;
+    /* For absolute positioning of children like .onsale */
+}
+
+/* Force full-width elements to span all columns of the grid */
+.single-product .post_item_single .product>.woocommerce-tabs,
+.single-product .post_item_single .product>.related.products {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+}
+
+/* Responsive Grid for Tablets/Mobile */
+@media (max-width: 991px) {
+    .single-product .post_item_single .product {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+}
+
+/* 3. Product Gallery (Left Column) */
+.single-product .woocommerce-product-gallery {
+    position: relative !important;
+    width: 100% !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    background-color: #ffffff !important;
+    /* Pure white backdrop for book cover contrast */
+    border: 1px solid rgba(29, 27, 24, 0.1) !important;
+    padding: 30px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02) !important;
+    box-sizing: border-box !important;
+}
+
+.single-product .woocommerce-product-gallery__wrapper {
+    width: 100% !important;
+    max-width: 440px !important;
+    /* Elegant maximum cover size */
+    margin: 0 auto !important;
+}
+
+.single-product .woocommerce-product-gallery__image {
+    width: 100% !important;
+    display: block !important;
+}
+
+/* Realistic 3D Book Shadow Effect */
+.single-product .woocommerce-product-gallery__image img.wp-post-image {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 8px 16px 16px 8px !important;
+    display: block !important;
+    box-shadow:
+        2px 2px 5px rgba(0, 0, 0, 0.05),
+        10px 15px 30px rgba(29, 27, 24, 0.18),
+        20px 25px 50px rgba(29, 27, 24, 0.15) !important;
+    border-left: 2px solid rgba(0, 0, 0, 0.05) !important;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.single-product .woocommerce-product-gallery__image:hover img.wp-post-image {
+    transform: scale(1.02) translateY(-4px) !important;
+    box-shadow:
+        2px 2px 5px rgba(0, 0, 0, 0.05),
+        12px 20px 35px rgba(29, 27, 24, 0.22),
+        25px 30px 60px rgba(29, 27, 24, 0.2) !important;
+}
+
+/* Hide zoom/magnifier trigger icon if undesired, or style it beautifully */
+.single-product .woocommerce-product-gallery__trigger {
+    position: absolute !important;
+    top: 20px !important;
+    right: 20px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(29, 27, 24, 0.1) !important;
+    border-radius: 50% !important;
+    width: 44px !important;
+    height: 44px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 10 !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+}
+
+.single-product .woocommerce-product-gallery__trigger:hover {
+    transform: scale(1.1) !important;
+    background: #1d1b18 !important;
+    border-color: #1d1b18 !important;
+}
+
+.single-product .woocommerce-product-gallery__trigger img.emoji {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+/* Sale Badge on Single Product Page */
+.single-product span.onsale {
+    position: absolute !important;
+    top: 20px !important;
+    left: 20px !important;
+    background-color: #d41f22 !important;
+    /* Theme Red for attention */
+    color: #ffffff !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding: 6px 14px !important;
+    border-radius: 30px !important;
+    margin: 0 !important;
+    min-height: auto !important;
+    min-width: auto !important;
+    line-height: 1.2 !important;
+    z-index: 10 !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 4px 10px rgba(212, 31, 34, 0.2) !important;
+}
+
+/* 4. Product Details Summary (Right Column) */
+.single-product .summary.entry-summary {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+}
+
+/* Product Title */
+.single-product h1.product_title.entry-title {
+    font-family: "Ruposhi Bangla UI Uni", "Kalpurush", serif !important;
+    font-size: 2.25rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    color: #1d1b18 !important;
+    /* Espresso */
+    margin: 0 0 15px 0 !important;
+    text-align: left !important;
+}
+
+@media (max-width: 767px) {
+    .single-product h1.product_title.entry-title {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* Price Section */
+.single-product .summary .price {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 15px !important;
+    margin: 0 0 25px 0 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 1.75rem !important;
+    color: #1d1b18 !important;
+    line-height: 1 !important;
+}
+
+/* Current / Sale Price */
+.single-product .summary .price ins,
+.single-product .summary .price>.amount {
+    color: #d41f22 !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+/* Original price (crossed out) */
+.single-product .summary .price del {
+    color: #8a8a8a !important;
+    font-size: 1.2rem !important;
+    font-weight: 400 !important;
+    text-decoration: line-through !important;
+}
+
+/* 5. Book Specific Details (Short Description Block) */
+.single-product .woocommerce-product-details__short-description {
+    border-top: 1px solid rgba(29, 27, 24, 0.1) !important;
+    border-bottom: 1px solid rgba(29, 27, 24, 0.1) !important;
+    padding: 24px 0 !important;
+    margin: 0 0 30px 0 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.7 !important;
+    color: #464036 !important;
+}
+
+.single-product .woocommerce-product-details__short-description p {
+    margin: 0 0 12px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.single-product .woocommerce-product-details__short-description p:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Style labels inside short description like "সম্পাদনা ও ভূমিকা" */
+.single-product .woocommerce-product-details__short-description strong {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #1d1b18 !important;
+}
+
+/* 6. Cart Form & Add to Cart/Buy Now Button */
+.single-product form.cart {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+    margin: 0 0 35px 0 !important;
+    flex-wrap: wrap !important;
+}
+
+/* Quantity input styling matching overall premium look */
+.single-product form.cart .quantity {
+    display: inline-flex !important;
+    align-items: center !important;
+    background: #f7e9d0 !important;
+    /* Theme Warm Cream */
+    border: 1px solid rgba(29, 27, 24, 0.15) !important;
+    border-radius: 12px !important;
+    padding: 0 12px !important;
+    position: relative !important;
+    height: 52px !important;
+    width: 130px !important;
+    box-sizing: border-box !important;
+    justify-content: space-between !important;
+}
+
+.single-product form.cart .quantity input.qty {
+    border: none !important;
+    background: transparent !important;
+    color: #1d1b18 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    width: 50px !important;
+    padding: 0 !important;
+    height: 100% !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -moz-appearance: textfield !important;
+}
+
+.single-product form.cart .quantity input.qty::-webkit-outer-spin-button,
+.single-product form.cart .quantity input.qty::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+/* Plus/Minus triggers */
+.single-product form.cart .quantity .q_inc,
+.single-product form.cart .quantity .q_dec {
+    cursor: pointer !important;
+    width: 24px !important;
+    height: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #1d1b18 !important;
+    font-weight: bold !important;
+    font-size: 20px !important;
+    user-select: none !important;
+    transition: opacity 0.2s ease !important;
+}
+
+.single-product form.cart .quantity .q_inc::before {
+    content: "+" !important;
+}
+
+.single-product form.cart .quantity .q_dec::before {
+    content: "-" !important;
+}
+
+.single-product form.cart .quantity .q_inc:hover,
+.single-product form.cart .quantity .q_dec:hover {
+    opacity: 0.5 !important;
+}
+
+/* Add to Cart / Buy Now Button */
+.single-product button.single_add_to_cart_button.button {
+    background-color: #1d1b18 !important;
+    /* Espresso */
+    color: #f7e9d0 !important;
+    /* Warm Cream */
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    padding: 0 40px !important;
+    border-radius: 12px !important;
+    border: 1px solid #1d1b18 !important;
+    height: 52px !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 200px !important;
+    letter-spacing: 0.5px !important;
+}
+
+.single-product button.single_add_to_cart_button.button:hover {
+    background-color: #3d3d3d !important;
+    border-color: #3d3d3d !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 15px rgba(29, 27, 24, 0.12) !important;
+}
+
+/* 7. Product Meta Details (Category, Product ID) */
+.single-product .product_meta {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important;
+    color: #8a8a8a !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    border-top: 1px solid rgba(29, 27, 24, 0.05) !important;
+    padding-top: 20px !important;
+}
+
+.single-product .product_meta span {
+    display: block !important;
+}
+
+.single-product .product_meta a {
+    color: #1d1b18 !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+}
+
+.single-product .product_meta a:hover {
+    color: #d41f22 !important;
+}
+
+.single-product .product_meta .product_id span {
+    color: #1d1b18 !important;
+    font-weight: 600 !important;
+}
+
+/* 8. Tabs Section (Reviews) */
+.single-product .woocommerce-tabs {
+    margin-top: 0px !important;
+    border-top: none !important;
+    padding-top: 0px !important;
+}
+
+.single-product .woocommerce-tabs ul.tabs {
+    list-style: none !important;
+    margin: 0 0 35px 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    gap: 40px !important;
+    border-bottom: 1px solid rgba(29, 27, 24, 0.1) !important;
+}
+
+.single-product .woocommerce-tabs ul.tabs li {
+    display: block !important;
+    padding: 0 0 15px 0 !important;
+    position: relative !important;
+}
+
+.single-product .woocommerce-tabs ul.tabs li a {
+    font-family: "Cormorant Garamond", "Ruposhi Bangla UI Uni", "Ruposhi", "Kalpurush", serif !important;
+    font-size: 1.35rem !important;
+    font-weight: 700 !important;
+    color: #8a8a8a !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+    outline: none !important;
+}
+
+.single-product .woocommerce-tabs ul.tabs li.active a,
+.single-product .woocommerce-tabs ul.tabs li a:hover {
+    color: #1d1b18 !important;
+}
+
+.single-product .woocommerce-tabs ul.tabs li.active::after {
+    content: "" !important;
+    position: absolute !important;
+    bottom: -1px !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 2.5px !important;
+    background-color: #1d1b18 !important;
+}
+
+/* Tab Panels Content Styling */
+.single-product .woocommerce-Tabs-panel {
+    font-family: "DM Sans", "Ruposhi Bangla UI Uni", "Ruposhi", "Kalpurush", sans-serif !important;
+    line-height: 1.8 !important;
+    color: #464036 !important;
+    font-size: 16px !important;
+}
+
+.single-product .woocommerce-Tabs-panel h2 {
+    font-family: "Cormorant Garamond", "Ruposhi Bangla UI Uni", "Ruposhi", "Kalpurush", serif !important;
+    font-size: 1.85rem !important;
+    color: #1d1b18 !important;
+    margin-bottom: 20px !important;
+    font-weight: 700 !important;
+}
+
+/* 9. Reviews Form & Review Cards */
+.single-product #comments .woocommerce-noreviews {
+    font-family: "DM Sans", "Ruposhi Bangla UI Uni", "Ruposhi", "Kalpurush", sans-serif !important;
+    color: #8a8a8a !important;
+    font-size: 15px !important;
+}
+
+.single-product .comment-respond {
+    background-color: #f7e9d0 !important;
+    /* Warm Cream */
+    border: 1px solid rgba(29, 27, 24, 0.08) !important;
+    border-radius: 20px !important;
+    padding: 40px !important;
+    margin-top: 40px !important;
+    box-sizing: border-box !important;
+}
+
+.single-product .comment-respond .comment-reply-title {
+    font-family: "Cormorant Garamond", "Ruposhi Bangla UI Uni", "Ruposhi", "Kalpurush", serif !important;
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    display: block !important;
+    margin-bottom: 25px !important;
+}
+
+/* Review Star Ratings Styling */
+.single-product .comment-form-rating {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    margin-bottom: 25px !important;
+}
+
+.single-product .comment-form-rating label {
+    font-family: "DM Sans", "Ruposhi Bangla UI Uni", "Ruposhi", "Kalpurush", sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    color: #1d1b18 !important;
+}
+
+.single-product p.stars {
+    margin: 0 !important;
+    line-height: 1 !important;
+}
+
+.single-product p.stars a {
+    color: #d41f22 !important;
+    /* Theme Accent Red for stars */
+    font-size: 16px !important;
+    text-decoration: none !important;
+    margin-right: 5px !important;
+}
+
+.single-product p.stars a::before {
+    color: #d41f22 !important;
+}
+
+/* Input elements inside comment form */
+.single-product .comment-form textarea,
+.single-product .comment-form input[type="text"],
+.single-product .comment-form input[type="email"] {
+    background: #ffffff !important;
+    border: 1px solid rgba(29, 27, 24, 0.15) !important;
+    border-radius: 12px !important;
+    padding: 14px 18px !important;
+    font-family: "DM Sans", "Ruposhi Bangla UI Uni", "Ruposhi", "Kalpurush", sans-serif !important;
+    font-size: 15px !important;
+    color: #1d1b18 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s ease !important;
+    outline: none !important;
+}
+
+.single-product .comment-form textarea:focus,
+.single-product .comment-form input:focus {
+    border-color: #1d1b18 !important;
+}
+
+/* Comment Form Privacy Agreement Box */
+.single-product .comment-form .comments_i_agree_privacy_policy {
+    margin-top: 15px !important;
+    font-family: "DM Sans", "Ruposhi Bangla UI Uni", "Ruposhi", "Kalpurush", sans-serif !important;
+    font-size: 14px !important;
+    color: #464036 !important;
+}
+
+.single-product .comment-form .comments_i_agree_privacy_policy input {
+    margin-right: 8px !important;
+    cursor: pointer !important;
+}
+
+/* Submit Review Button */
+.single-product .comment-form input[type="submit"] {
+    background-color: #1d1b18 !important;
+    /* Espresso */
+    color: #f7e9d0 !important;
+    /* Warm Cream */
+    font-family: "Cormorant Garamond", "Ruposhi Bangla UI Uni", "Ruposhi", "Kalpurush", serif !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    padding: 0 45px !important;
+    height: 50px !important;
+    border-radius: 12px !important;
+    border: 1px solid #1d1b18 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.single-product .comment-form input[type="submit"]:hover {
+    background-color: #3d3d3d !important;
+    border-color: #3d3d3d !important;
+    color: #ffffff !important;
+}
+
+/* 10. Related Products Section */
+.single-product section.related.products {
+    margin-top: 80px !important;
+    border-top: 1px solid rgba(29, 27, 24, 0.1) !important;
+    padding-top: 60px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.single-product section.related.products>h2 {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 2.25rem !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    margin-bottom: 40px !important;
+    text-align: center !important;
+}
+
+/* Related Products Card Width Fix */
+.single-product section.related.products ul.products {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 30px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.single-product section.related.products ul.products li.product,
+.woocommerce .single-product section.related.products ul.products[class*="columns-"] li.product,
+.woocommerce-page .single-product section.related.products ul.products[class*="columns-"] li.product {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+}
+
+.single-product section.related.products ul.products li.product .post_item {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+}
+
+@media (max-width: 991px) {
+    .single-product section.related.products ul.products {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .single-product section.related.products ul.products {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+}
+
+/* ==========================================================================
+   WOOCOMMERCE CART PAGE CUSTOM STYLING (MANDAS BRANDING)
+   ========================================================================== */
+
+/* 1. Page Padding */
+.woocommerce-cart .page_content_wrap {
+    padding-left: 80px !important;
+    padding-right: 80px !important;
+    padding-top: 50px !important;
+    padding-bottom: 80px !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 991px) {
+    .woocommerce-cart .page_content_wrap {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        padding-top: 30px !important;
+    }
+}
+
+/* 2. Responsive Side-by-Side Grid Layout (Desktop) */
+@media (min-width: 992px) {
+    .woocommerce-cart .woocommerce {
+        display: grid !important;
+        grid-template-columns: 6.5fr 3.5fr !important;
+        gap: 40px !important;
+        align-items: start !important;
+    }
+
+    .woocommerce-cart .woocommerce-cart-form {
+        grid-column: 1 / 2 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .woocommerce-cart .cart-collaterals {
+        grid-column: 2 / 3 !important;
+        width: 100% !important;
+        margin-top: 0 !important;
+    }
+}
+
+/* 3. Cart Shop Table Styling */
+.woocommerce-cart table.shop_table.cart {
+    border-collapse: separate !important;
+    border-spacing: 0 12px !important;
+    /* Elegant row gaps */
+    border: none !important;
+    background: transparent !important;
+    width: 100% !important;
+}
+
+.woocommerce-cart table.shop_table.cart thead th {
+    background-color: #1d1b18 !important;
+    /* Espresso */
+    color: #f7e9d0 !important;
+    /* Warm Cream */
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    padding: 16px 20px !important;
+    border: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.woocommerce-cart table.shop_table.cart thead th:first-child {
+    border-radius: 12px 0 0 12px !important;
+}
+
+.woocommerce-cart table.shop_table.cart thead th:last-child {
+    border-radius: 0 12px 12px 0 !important;
+}
+
+.woocommerce-cart table.shop_table.cart tbody tr.cart_item {
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.woocommerce-cart table.shop_table.cart tbody tr.cart_item:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(29, 27, 24, 0.06) !important;
+}
+
+.woocommerce-cart table.shop_table.cart tbody td {
+    padding: 20px !important;
+    border: none !important;
+    border-top: 1px solid rgba(29, 27, 24, 0.06) !important;
+    border-bottom: 1px solid rgba(29, 27, 24, 0.06) !important;
+    vertical-align: middle !important;
+}
+
+.woocommerce-cart table.shop_table.cart tbody td:first-child {
+    border-left: 1px solid rgba(29, 27, 24, 0.06) !important;
+    border-radius: 16px 0 0 16px !important;
+}
+
+.woocommerce-cart table.shop_table.cart tbody td:last-child {
+    border-right: 1px solid rgba(29, 27, 24, 0.06) !important;
+    border-radius: 0 16px 16px 0 !important;
+}
+
+/* 4. Product Row Item Details */
+/* Thumbnail */
+.woocommerce-cart table.shop_table.cart td.product-thumbnail img {
+    width: 65px !important;
+    height: auto !important;
+    border-radius: 8px !important;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08) !important;
+    display: inline-block !important;
+}
+
+/* Product Title Link */
+.woocommerce-cart table.shop_table.cart td.product-name a {
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    text-decoration: none !important;
+    font-size: 15px !important;
+    transition: color 0.2s ease !important;
+}
+
+.woocommerce-cart table.shop_table.cart td.product-name a:hover {
+    color: #d41f22 !important;
+    /* Accent Red */
+}
+
+/* Price & Subtotal text formatting */
+.woocommerce-cart table.shop_table.cart td.product-price,
+.woocommerce-cart table.shop_table.cart td.product-subtotal {
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    font-size: 16px !important;
+}
+
+.woocommerce-cart table.shop_table.cart td.product-subtotal .amount {
+    color: #d41f22 !important;
+    /* Theme Red for line total */
+}
+
+/* Remove button */
+.woocommerce-cart table.shop_table.cart td.product-remove a.remove {
+    color: #d41f22 !important;
+    background-color: rgba(212, 31, 34, 0.06) !important;
+    border-radius: 50% !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+}
+
+.woocommerce-cart table.shop_table.cart td.product-remove a.remove:hover {
+    background-color: #d41f22 !important;
+    color: #ffffff !important;
+}
+
+/* Quantity inputs */
+.woocommerce-cart table.shop_table.cart td.product-quantity .quantity {
+    display: inline-flex !important;
+    align-items: center !important;
+    background: #f7e9d0 !important;
+    /* Warm Cream */
+    border: 1px solid rgba(29, 27, 24, 0.15) !important;
+    border-radius: 10px !important;
+    padding: 0 8px !important;
+    height: 40px !important;
+    width: 100px !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+}
+
+.woocommerce-cart table.shop_table.cart td.product-quantity .quantity input.qty {
+    border: none !important;
+    background: transparent !important;
+    color: #1d1b18 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    text-align: center !important;
+    width: 35px !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* 5. Coupon and Action Buttons Row */
+.woocommerce-cart table.shop_table.cart td.actions {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 20px 0 !important;
+}
+
+.woocommerce-cart table.shop_table.cart td.actions .coupon {
+    display: inline-flex !important;
+    gap: 12px !important;
+    align-items: center !important;
+}
+
+.woocommerce-cart table.shop_table.cart td.actions .coupon input#coupon_code {
+    border: 1px solid rgba(29, 27, 24, 0.15) !important;
+    border-radius: 12px !important;
+    padding: 10px 16px !important;
+    background-color: #ffffff !important;
+    color: #1d1b18 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    width: 180px !important;
+    height: 46px !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    font-size: 14px !important;
+}
+
+.woocommerce-cart table.shop_table.cart td.actions button.button {
+    background-color: #1d1b18 !important;
+    /* Espresso */
+    color: #f7e9d0 !important;
+    /* Warm Cream */
+    font-family: 'Cormorant Garamond', serif !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    padding: 0 25px !important;
+    border-radius: 12px !important;
+    border: 1px solid #1d1b18 !important;
+    height: 46px !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    letter-spacing: 0.5px !important;
+}
+
+.woocommerce-cart table.shop_table.cart td.actions button.button:hover {
+    background-color: #3d3d3d !important;
+    border-color: #3d3d3d !important;
+    color: #ffffff !important;
+}
+
+/* Customize Update Cart button style to look secondary */
+.woocommerce-cart table.shop_table.cart td.actions button[name="update_cart"] {
+    float: right !important;
+    background-color: transparent !important;
+    color: #1d1b18 !important;
+    border: 1px solid #1d1b18 !important;
+}
+
+.woocommerce-cart table.shop_table.cart td.actions button[name="update_cart"]:hover {
+    background-color: #1d1b18 !important;
+    color: #f7e9d0 !important;
+}
+
+/* 6. Cart Totals Box (Right Side) */
+.woocommerce-cart .cart-collaterals .cart_totals {
+    background-color: #f7e9d0 !important;
+    /* Warm Cream box */
+    border: 1px solid rgba(29, 27, 24, 0.08) !important;
+    border-radius: 20px !important;
+    padding: 30px !important;
+    box-sizing: border-box !important;
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals h2 {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.65rem !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    margin-bottom: 20px !important;
+    border-bottom: 1px solid rgba(29, 27, 24, 0.1) !important;
+    padding-bottom: 10px !important;
+    text-transform: none !important;
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals table.shop_table_responsive {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-bottom: 25px !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals table.shop_table_responsive tr {
+    border-bottom: 1px solid rgba(29, 27, 24, 0.06) !important;
+    background: transparent !important;
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals table.shop_table_responsive th,
+.woocommerce-cart .cart-collaterals .cart_totals table.shop_table_responsive td {
+    padding: 15px 0 !important;
+    background: transparent !important;
+    border: none !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1d1b18 !important;
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals table.shop_table_responsive th {
+    font-weight: 700 !important;
+    text-align: left !important;
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals table.shop_table_responsive td {
+    text-align: right !important;
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals table.shop_table_responsive tr.order-total th,
+.woocommerce-cart .cart-collaterals .cart_totals table.shop_table_responsive tr.order-total td {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals table.shop_table_responsive tr.order-total td .amount {
+    color: #d41f22 !important;
+    /* Accent Red for final checkout total */
+}
+
+/* Proceed to Checkout Button */
+.woocommerce-cart .cart-collaterals .cart_totals .wc-proceed-to-checkout a.checkout-button {
+    background-color: #1d1b18 !important;
+    /* Espresso button background */
+    color: #f7e9d0 !important;
+    /* Warm Cream text */
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    padding: 16px 20px !important;
+    border-radius: 12px !important;
+    display: block !important;
+    text-decoration: none !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    box-shadow: 0 4px 15px rgba(29, 27, 24, 0.1) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals .wc-proceed-to-checkout a.checkout-button:hover {
+    background-color: #3d3d3d !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(29, 27, 24, 0.15) !important;
+}
+
+/* ==========================================================================
+   MANDAS CUSTOM TABBED LOGIN/SIGNUP STYLING
+   ========================================================================== */
+
+/* Outer Auth Card Wrapper */
+.mandas-auth-card {
+    max-width: 520px !important;
+    margin: 60px auto !important;
+    background-color: #ffffff !important;
+    border: 1px solid var(--wp--preset--color--theme-color-bd-color, rgba(29, 27, 24, 0.12)) !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 35px rgba(29, 27, 24, 0.05) !important;
+    box-sizing: border-box !important;
+}
+
+/* Tabs Navigation Bar */
+.mandas-auth-tabs {
+    display: flex !important;
+    width: 100% !important;
+    border-bottom: 1px solid var(--wp--preset--color--theme-color-bd-color, rgba(29, 27, 24, 0.1)) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: var(--wp--preset--color--theme-color-bg-color-2, #F1EFE3) !important;
+}
+
+/* Auth Tab Button */
+.mandas-auth-tab {
+    flex: 1 !important;
+    background: var(--wp--preset--color--theme-color-bg-color-2, #F1EFE3) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 20px 10px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    color: var(--wp--preset--color--theme-color-meta, #8a8a8a) !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    outline: none !important;
+}
+
+/* Active Tab Styles (Design System Aligned) */
+.mandas-auth-tab.active {
+    background-color: var(--wp--preset--color--theme-color-title, #1d1b18) !important;
+    /* Espresso/Dark action background */
+    color: var(--wp--preset--color--theme-color-bg-color, #f7e9d0) !important;
+    /* Warm Cream text */
+}
+
+.mandas-auth-tab:not(.active):hover {
+    background-color: var(--wp--preset--color--theme-color-bg-color, #fcfbf7) !important;
+    color: var(--wp--preset--color--theme-color-title, #1d1b18) !important;
+}
+
+/* Content Container Padding */
+.mandas-auth-content {
+    padding: 40px 35px 35px 35px !important;
+    background-color: #ffffff !important;
+}
+
+/* Force Form Elements Backgrounds to White and Remove Box Border/Padding */
+.mandas-auth-content form.woocommerce-form-login,
+.mandas-auth-content form.woocommerce-form-register {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+    /* Override any theme-set hardcoded height */
+}
+
+/* Hide Default WooCommerce Grid Display */
+.mandas-auth-card #customer_login {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.mandas-auth-card #customer_login .col-1,
+.mandas-auth-card #customer_login .col-2 {
+    float: none !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Tab Toggle Hide/Show Rules */
+.mandas-auth-card.show-login #customer_login .col-2 {
+    display: none !important;
+}
+
+.mandas-auth-card.show-login #customer_login .col-1 {
+    display: block !important;
+}
+
+.mandas-auth-card.show-register #customer_login .col-1 {
+    display: none !important;
+}
+
+.mandas-auth-card.show-register #customer_login .col-2 {
+    display: block !important;
+}
+
+/* Hide WooCommerce Default Form Headings */
+.mandas-auth-card #customer_login h2 {
+    display: none !important;
+}
+
+/* Welcome Headers styling */
+.mandas-auth-header {
+    margin-bottom: 30px !important;
+    text-align: left !important;
+}
+
+.mandas-auth-sub {
+    display: block !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: var(--wp--preset--color--theme-color-meta, #8a8a8a) !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 6px !important;
+}
+
+.mandas-auth-title {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 2.2rem !important;
+    font-weight: 700 !important;
+    color: var(--wp--preset--color--theme-color-title, #1d1b18) !important;
+    margin: 0 0 10px 0 !important;
+    line-height: 1.25 !important;
+}
+
+.mandas-auth-desc {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important;
+    color: var(--wp--preset--color--theme-color-meta, #8a8a8a) !important;
+    margin: 0 !important;
+    line-height: 1.5 !important;
+}
+
+/* Input Fields styling */
+.mandas-auth-content form .form-row {
+    margin-bottom: 20px !important;
+}
+
+.mandas-auth-content form .form-row label {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    color: var(--wp--preset--color--theme-color-meta, #8a8a8a) !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+}
+
+.mandas-auth-content form .form-row input.input-text {
+    width: 100% !important;
+    background-color: #ffffff !important;
+    border: 1px solid var(--wp--preset--color--theme-color-bd-color, rgba(29, 27, 24, 0.15)) !important;
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: var(--wp--preset--color--theme-color-title, #1d1b18) !important;
+    outline: none !important;
+    transition: all 0.3s ease !important;
+    box-sizing: border-box !important;
+    height: 48px !important;
+}
+
+.mandas-auth-content form .form-row input.input-text:focus {
+    border-color: var(--wp--preset--color--theme-color-link, #d2a66f) !important;
+    box-shadow: 0 0 0 3px rgba(210, 166, 111, 0.15) !important;
+}
+
+/* WooCommerce Password Field wrapper & Show/Hide Eye toggle */
+.mandas-auth-content .password-input {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+.mandas-auth-content .password-input input {
+    padding-right: 48px !important;
+}
+
+.mandas-auth-content .show-password-input {
+    position: absolute !important;
+    right: 12px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    color: var(--wp--preset--color--theme-color-meta, #8a8a8a) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 24px !important;
+    height: 24px !important;
+    outline: none !important;
+}
+
+/* Privacy policy text at registration */
+.mandas-auth-content .woocommerce-privacy-policy-text {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    color: var(--wp--preset--color--theme-color-meta, #8a8a8a) !important;
+    margin-bottom: 20px !important;
+}
+
+.mandas-auth-content .woocommerce-privacy-policy-text a {
+    color: var(--wp--preset--color--theme-color-link, #d2a66f) !important;
+    text-decoration: none !important;
+}
+
+.mandas-auth-content .woocommerce-privacy-policy-text a:hover {
+    color: var(--wp--preset--color--theme-color-hover, #ad895d) !important;
+}
+
+/* Form Action Row adjustments (Remember me and Submit button) */
+.mandas-auth-content form .form-row-wide {
+    width: 100% !important;
+}
+
+.mandas-auth-content form label.woocommerce-form-login__rememberme {
+    display: inline-flex !important;
+    align-items: center !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    color: var(--wp--preset--color--theme-color-title, #1d1b18) !important;
+    cursor: pointer !important;
+    margin-bottom: 20px !important;
+}
+
+.mandas-auth-content form label.woocommerce-form-login__rememberme input {
+    margin-right: 8px !important;
+}
+
+/* Submit Buttons styling (Large, Center-focused) */
+.mandas-auth-content form button[type="submit"] {
+    width: 100% !important;
+    background-color: var(--wp--preset--color--theme-color-title, #1d1b18) !important;
+    /* Espresso Accent */
+    color: var(--wp--preset--color--theme-color-bg-color, #f7e9d0) !important;
+    /* Warm Cream Text */
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    height: 52px !important;
+    border: 1px solid var(--wp--preset--color--theme-color-title, #1d1b18) !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    text-transform: uppercase !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+}
+
+.mandas-auth-content form button[type="submit"]:hover {
+    background-color: var(--wp--preset--color--theme-color-link, #d2a66f) !important;
+    /* Gold Hover Accent */
+    border-color: var(--wp--preset--color--theme-color-link, #d2a66f) !important;
+    color: var(--wp--preset--color--theme-color-title, #1d1b18) !important;
+    box-shadow: 0 4px 15px rgba(210, 166, 111, 0.2) !important;
+}
+
+/* Lost Password Link styling */
+.mandas-auth-content .lost_password {
+    text-align: center !important;
+    margin-top: 20px !important;
+    font-family: 'DM Sans', sans-serif !important;
+}
+
+.mandas-auth-content .lost_password a {
+    color: var(--wp--preset--color--theme-color-link, #d2a66f) !important;
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    letter-spacing: 0.8px !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+}
+
+.mandas-auth-content .lost_password a:hover {
+    color: var(--wp--preset--color--theme-color-hover, #ad895d) !important;
+}
+
+/* Responsive Overrides */
+@media (max-width: 576px) {
+    .mandas-auth-card {
+        margin: 30px 15px !important;
+    }
+
+    .mandas-auth-content {
+        padding: 30px 20px 25px 20px !important;
+    }
+}
+
+/* Header User Icon Auth Label Styling */
+.elementor-widget-icon-box .elementor-icon-box-icon a.mandas-header-account-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    text-decoration: none !important;
+    border: 1px solid #1d1b18 !important;
+    /* Border around it of color #1d1b18 */
+    padding: 8px 18px !important;
+    /* Spacing */
+    border-radius: 30px !important;
+    /* Pill style */
+    transition: all 0.3s ease !important;
+}
+
+.mandas-header-auth-label {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: var(--wp--preset--color--theme-color-title, #1d1b18) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
+    transition: color 0.3s ease !important;
+}
+
+/* Hover effects for the bordered button */
+.elementor-widget-icon-box:hover a.mandas-header-account-link {
+    background-color: var(--wp--preset--color--theme-color-title, #1d1b18) !important;
+    border-color: var(--wp--preset--color--theme-color-title, #1d1b18) !important;
+}
+
+.elementor-widget-icon-box:hover .mandas-header-auth-label {
+    color: var(--wp--preset--color--theme-color-bg-color, #f7e9d0) !important;
+    /* Switch to cream text */
+}
+
+/* Make sure the user SVG icon inherits color/stroke correctly on hover */
+.elementor-widget-icon-box a.mandas-header-account-link svg {
+    transition: stroke 0.3s ease !important;
+}
+
+.elementor-widget-icon-box:hover a.mandas-header-account-link svg {
+    stroke: var(--wp--preset--color--theme-color-bg-color, #f7e9d0) !important;
+    /* Light stroke on hover */
+}
+
+/* Mobile responsive label hiding and border removal if space is tight */
+@media (max-width: 480px) {
+    .mandas-header-auth-label {
+        display: none !important;
+        /* Only show user icon on extremely small screens */
+    }
+
+    .elementor-widget-icon-box .elementor-icon-box-icon a.mandas-header-account-link {
+        border: none !important;
+        padding: 0 !important;
+        background: transparent !important;
+    }
+}
+
+/* ==========================================================================
+   MANDAS SHOP AND ARCHIVE PAGE SIDEBAR LAYOUT
+   ========================================================================== */
+.mandas-shop-layout {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 40px !important;
+    /* Space between sidebar and products list */
+    width: 100% !important;
+    align-items: flex-start !important;
+    box-sizing: border-box !important;
+}
+
+/* Sidebar taking 20% width */
+.mandas-shop-sidebar {
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    max-width: 20% !important;
+    box-sizing: border-box !important;
+    background-color: #f7e9d0 !important;
+    /* Warm Cream to match cards */
+    border: 1px solid rgba(29, 27, 24, 0.1) !important;
+    border-radius: 20px !important;
+    padding: 24px 20px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+    position: sticky !important;
+    top: 120px !important;
+    /* Sticky sidebar on scroll */
+    z-index: 99 !important;
+}
+
+/* Content area taking remaining width */
+.mandas-shop-content {
+    flex: 1 !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Force children of content area to stack vertically and take 100% width */
+.mandas-shop-content-header,
+.mandas-shop-content ul.products,
+.mandas-shop-content .woocommerce-pagination,
+.mandas-shop-content .woocommerce-notices-wrapper,
+.mandas-shop-content .literature_shop_mode_buttons {
+    width: 100% !important;
+    float: none !important;
+    clear: both !important;
+}
+
+/* Content header row with flex to align count and ordering side-by-side */
+.mandas-shop-content-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-bottom: 30px !important;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
+}
+
+.mandas-shop-content-header .woocommerce-result-count {
+    margin: 0 !important;
+    float: none !important;
+    display: inline-block !important;
+}
+
+.mandas-shop-content-header .woocommerce-ordering {
+    margin: 0 !important;
+    float: none !important;
+    display: inline-block !important;
+}
+
+/* Filters wrapper style */
+.mandas-shop-filters-wrap {
+    width: 100% !important;
+}
+
+@media (min-width: 1025px) {
+    .mandas-shop-filters-wrap {
+        display: block !important;
+        /* Force always show on desktop */
+    }
+}
+
+/* Adjust columns in products grid to fit 3 columns when sidebar is active */
+@media (min-width: 1201px) {
+    .mandas-shop-layout ul.products {
+        grid-template-columns: repeat(3, 1fr) !important;
+        /* 3 columns layout as shown in mockup */
+        gap: 25px !important;
+    }
+}
+
+/* Clear margins/styles inside sidebar WOOF containers */
+.mandas-shop-sidebar .woof_container {
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-bottom: 20px !important;
+    display: block !important;
+    box-sizing: border-box !important;
+}
+
+.mandas-shop-sidebar .woof_submit_search_form_container {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    margin-top: 15px !important;
+}
+
+.mandas-shop-sidebar .woof_submit_search_form_container>* {
+    width: 100% !important;
+}
+
+/* Pagination container alignment inside shop content */
+.mandas-shop-content .woocommerce-pagination {
+    text-align: center !important;
+    margin-top: 50px !important;
+    margin-bottom: 30px !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+.mandas-shop-content .woocommerce-pagination ul.page-numbers {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+/* Header section (breadcrumb & title) alignment */
+.list_products_header {
+    padding: 20px 80px !important;
+    box-sizing: border-box !important;
+}
+
+/* On mobile/tablet screens, toggle layout to stacked */
+@media (max-width: 1024px) {
+    .list_products_header {
+        padding: 20px !important;
+    }
+
+    .mandas-shop-layout {
+        flex-direction: column !important;
+        gap: 25px !important;
+    }
+
+    .mandas-shop-sidebar {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        position: static !important;
+        /* Disable sticky on mobile */
+        padding: 14px 20px !important;
+        /* Tighter padding when collapsed */
+        border-radius: 12px !important;
+        transition: padding 0.3s ease !important;
+    }
+
+    .mandas-shop-sidebar.is-expanded {
+        padding: 24px 20px !important;
+        /* Full padding when expanded */
+    }
+
+    .mandas-shop-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+
+    /* Filters wrapper and title interactive styles on mobile/tablet */
+    .mandas-shop-filters-wrap {
+        display: none;
+        /* Collapse by default on mobile/tablet */
+    }
+
+    .mandas-sidebar-title {
+        font-size: 1.25rem !important;
+        cursor: pointer !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+        border-bottom: none !important;
+        transition: margin-bottom 0.3s ease !important;
+    }
+
+    .mandas-shop-sidebar.is-expanded .mandas-sidebar-title {
+        margin-bottom: 20px !important;
+        /* Restore margin when expanded */
+        padding-bottom: 10px !important;
+        border-bottom: 1px solid rgba(29, 27, 24, 0.1) !important;
+    }
+
+    .mandas-sidebar-title::after {
+        content: '▼' !important;
+        font-size: 0.7rem !important;
+        color: #1d1b18 !important;
+        opacity: 0.6 !important;
+        transition: transform 0.3s ease !important;
+        transform: rotate(0deg);
+    }
+
+    .mandas-shop-sidebar.is-expanded .mandas-sidebar-title::after {
+        transform: rotate(180deg) !important;
+    }
+
+    /* Inline sorting and count on mobile/tablet */
+    .mandas-shop-content-header {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 15px !important;
+    }
+
+    .mandas-shop-content-header .woocommerce-result-count {
+        font-size: 0.9rem !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    .mandas-shop-content-header .woocommerce-ordering {
+        margin: 0 !important;
+    }
+
+    .mandas-shop-content-header .woocommerce-ordering select.orderby {
+        font-size: 0.85rem !important;
+        padding: 8px 30px 8px 12px !important;
+        max-width: 170px !important;
+        width: auto !important;
+        height: auto !important;
+        line-height: normal !important;
+    }
+}
+
+/* Single Product Page spacing */
+.single-product .post_item_single {
+    padding: 20px 80px !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 1024px) {
+    .single-product .post_item_single {
+        padding: 20px !important;
+    }
+}
+
+/* ==========================================================================
+   FEATURED CATEGORIES SECTION & SHOW MORE COLLAPSE SYSTEM
+   ========================================================================== */
+
+/* 1. Main Grid Setup for Wrapper */
+.featured-cat-img-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important;
+    gap: 20px !important;
+    width: 100% !important;
+    margin-bottom: 20px !important;
+    flex-wrap: nowrap !important;
+    /* Override Elementor flex defaults */
+    flex-direction: row !important;
+    overflow: visible !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+
+/* 2. Grid Item Spacing and Hover Effects */
+.featured-cat-img-wrapper>div {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background-color: #f7e9d0 !important;
+    border: 1px solid transparent !important;
+    border-radius: 12px !important;
+    padding: 5px !important;
+    /* 5px padding all around the image */
+    box-sizing: border-box !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04) !important;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s ease !important;
+    cursor: pointer;
+}
+
+.featured-cat-img-wrapper>div img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    /* Conforms nicely with 5px padding */
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* Premium Card hover lifts and shadows */
+.featured-cat-img-wrapper>div:hover {
+    transform: translateY(-6px) !important;
+    background-color: #ebdcb9 !important;
+    /* Slightly darker warm cream on hover */
+    box-shadow: 0 12px 24px rgba(29, 27, 24, 0.12) !important;
+}
+
+/* 3. Collapse/Show-More state CSS rules (Responsive Hiding after 1st row) */
+/* Collapse is active by default (no .expanded and no .no-collapse class) */
+.featured-cat-img-wrapper:not(.expanded):not(.no-collapse)>div:not(.featured-cat-toggle-card) {
+    display: none !important;
+}
+
+@media (min-width: 1201px) {
+
+    /* Desktop: 7 columns. Show first 6 categories + toggle card by default */
+    .featured-cat-img-wrapper:not(.expanded):not(.no-collapse)>div:nth-child(-n+6) {
+        display: flex !important;
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+    .featured-cat-img-wrapper {
+        grid-template-columns: repeat(5, 1fr) !important;
+        gap: 16px !important;
+    }
+
+    /* Laptop: 5 columns. Show first 4 categories + toggle card by default */
+    .featured-cat-img-wrapper:not(.expanded):not(.no-collapse)>div:nth-child(-n+4) {
+        display: flex !important;
+    }
+}
+
+@media (max-width: 768px) and (min-width: 481px) {
+    .featured-cat-img-wrapper {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    /* Tablet: 4 columns. Show first 3 categories + toggle card by default */
+    .featured-cat-img-wrapper:not(.expanded):not(.no-collapse)>div:nth-child(-n+3) {
+        display: flex !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .featured-cat-img-wrapper {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    /* Mobile: 3 columns. Show first 2 categories + toggle card by default */
+    .featured-cat-img-wrapper:not(.expanded):not(.no-collapse)>div:nth-child(-n+2) {
+        display: flex !important;
+    }
+}
+
+/* 4. Fade-in animation for revealed elements */
+@keyframes fadeInCat {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (min-width: 1201px) {
+    .featured-cat-img-wrapper.expanded>div:nth-child(n+7) {
+        animation: fadeInCat 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+    .featured-cat-img-wrapper.expanded>div:nth-child(n+5) {
+        animation: fadeInCat 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+}
+
+@media (max-width: 768px) and (min-width: 481px) {
+    .featured-cat-img-wrapper.expanded>div:nth-child(n+4) {
+        animation: fadeInCat 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+}
+
+@media (max-width: 480px) {
+    .featured-cat-img-wrapper.expanded>div:nth-child(n+3) {
+        animation: fadeInCat 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+}
+
+/* 5. Toggle Card Styling (Grid Card style) */
+.featured-cat-toggle-card {
+    background-color: #f7e9d0 !important;
+    border: 1px solid transparent !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04) !important;
+    cursor: pointer !important;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s ease !important;
+    height: 100% !important;
+    /* Stretch to fill row height naturally */
+    min-height: 80px !important;
+    /* Ensure it has a nice minimal presence on smaller screens */
+}
+
+.featured-cat-toggle-card:hover {
+    background-color: #ebdcb9 !important;
+    /* Slightly darker warm cream on hover */
+    transform: translateY(-6px) !important;
+    box-shadow: 0 12px 24px rgba(29, 27, 24, 0.12) !important;
+}
+
+.toggle-card-content {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    text-align: left !important;
+    color: #1d1b18 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.toggle-text-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
+}
+
+.toggle-card-title {
+    font-family: 'Cormorant Garamond', 'Ruposhi Bangla UI Uni', serif !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    color: #1d1b18 !important;
+}
+
+.toggle-text-wrap .brush-stroke {
+    width: 60px !important;
+    height: 4px !important;
+    margin-top: 1px !important;
+    opacity: 0.95 !important;
+}
+
+.featured-cat-toggle-card .chevron-icon {
+    flex-shrink: 0 !important;
+    color: #1d1b18 !important;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.featured-cat-img-wrapper.expanded .featured-cat-toggle-card .chevron-icon {
+    transform: rotate(180deg) !important;
+}
+
+/* ==========================================================================
+   6. MINI-CART PANEL WIDGET DESIGN SYSTEM INTEGRATION
+   ========================================================================== */
+/* Main Widget Panel Container */
+.sc_layouts_cart_panel_widget,
+.sc_layouts_cart_panel_widget .widget_shopping_cart {
+    background-color: #f7e9d0 !important;
+    /* Warm Cream background */
+    color: #1d1b18 !important;
+    padding: 0 !important;
+    /* Get rid of outer padding completely */
+}
+
+/* Cart Panel Header */
+.sc_layouts_cart_panel_header {
+    border-bottom: 2px solid rgba(29, 27, 24, 0.1) !important;
+    padding: 24px 16px 16px 16px !important;
+    /* Balanced header padding */
+    margin-bottom: 15px !important;
+}
+
+.widget_shopping_cart_content {
+    padding: 0 16px 24px 16px !important;
+    /* Balanced inner content padding */
+}
+
+.sc_layouts_cart_panel_title {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.65rem !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    /* Keep text & badge together */
+    gap: 10px !important;
+    /* Small gap between text and badge */
+    width: 100% !important;
+}
+
+/* Close Button in Header */
+.sc_layouts_cart_panel_close_btn {
+    background: none !important;
+    border: none !important;
+    color: #1d1b18 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 50% !important;
+    background-color: rgba(29, 27, 24, 0.05) !important;
+    transition: all 0.2s ease !important;
+    margin-left: auto !important;
+    /* Push it to the far right of the title */
+}
+
+.sc_layouts_cart_panel_close_btn:hover {
+    background-color: #d41f22 !important;
+    color: #ffffff !important;
+}
+
+/* Cart Items Count Badge */
+.sc_layouts_cart_items_short {
+    background-color: #d41f22 !important;
+    /* Theme Red Accent */
+    color: #ffffff !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    padding: 2px 10px !important;
+    border-radius: 20px !important;
+    min-width: 24px !important;
+    height: 24px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Cart List */
+ul.woocommerce-mini-cart {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Individual Cart Item Card */
+li.woocommerce-mini-cart-item {
+    position: relative !important;
+    background-color: #ffffff !important;
+    /* White item card */
+    border: 1px solid transparent !important;
+    border-radius: 16px !important;
+    padding: 12px !important;
+    margin-bottom: 10px !important;
+    /* Decreased gap between cards */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+li.woocommerce-mini-cart-item:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 16px rgba(29, 27, 24, 0.06) !important;
+}
+
+/* Item Inner Wrapper */
+.trx_addons_sc_layouts_cart_mini_cart_item_inner {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 12px !important;
+}
+
+/* Remove button placement & style */
+li.woocommerce-mini-cart-item a.remove {
+    position: absolute !important;
+    top: 8px !important;
+    right: 8px !important;
+    width: 20px !important;
+    height: 20px !important;
+    background-color: rgba(29, 27, 24, 0.05) !important;
+    color: #1d1b18 !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+    line-height: 1 !important;
+    z-index: 10 !important;
+}
+
+li.woocommerce-mini-cart-item a.remove:hover {
+    background-color: #d41f22 !important;
+    color: #ffffff !important;
+}
+
+/* Cart Item Image wrapper */
+.trx_addons_sc_layouts_cart_mini_cart_item_link_image {
+    width: 60px !important;
+    height: 60px !important;
+    flex-shrink: 0 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+}
+
+.trx_addons_sc_layouts_cart_mini_cart_item_link_image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* Cart Item Details Content */
+.trx_addons_sc_layouts_cart_mini_cart_item_content {
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    padding-right: 15px !important;
+    /* Leave space for remove button */
+}
+
+.trx_addons_sc_layouts_cart_mini_cart_item_name {
+    font-family: 'Ruposhi Bangla UI Uni', 'Cormorant Garamond', serif !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    color: #1d1b18 !important;
+    display: block !important;
+    /* Limit title to 2 lines */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
+/* Custom quantity & price block */
+.mini-cart-qty-wrap {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-top: 6px !important;
+    width: 100% !important;
+}
+
+.mini-cart-qty-btn {
+    width: 22px !important;
+    height: 22px !important;
+    border-radius: 6px !important;
+    border: 1px solid rgba(29, 27, 24, 0.2) !important;
+    background-color: #f7e9d0 !important;
+    /* Matches design */
+    color: #1d1b18 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+}
+
+.mini-cart-qty-btn:hover {
+    background-color: #1d1b18 !important;
+    color: #f7e9d0 !important;
+    border-color: #1d1b18 !important;
+}
+
+.mini-cart-qty-val {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    min-width: 14px !important;
+    text-align: center !important;
+}
+
+.mini-cart-price {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #d41f22 !important;
+    /* Theme Red for Price */
+    margin-left: auto !important;
+    /* Push price to the right */
+}
+
+/* Hide fallback native quantity layout */
+.woocommerce-mini-cart-item .quantity {
+    display: block !important;
+    width: 100% !important;
+}
+
+/* Subtotal Section */
+.widget_shopping_cart p.total {
+    border-top: 2px solid rgba(29, 27, 24, 0.1) !important;
+    border-bottom: 2px solid rgba(29, 27, 24, 0.1) !important;
+    padding: 16px 0 !important;
+    margin: 20px 0 !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.widget_shopping_cart p.total .amount {
+    color: #d41f22 !important;
+    font-family: 'DM Sans', sans-serif !important;
+}
+
+/* Cart Action Buttons */
+.widget_shopping_cart p.buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 12px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.widget_shopping_cart p.buttons a.button {
+    flex: 1 1 0% !important;
+    /* Force equal width */
+    width: 100% !important;
+    /* Fills its flex-basis container */
+    box-sizing: border-box !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    padding: 12px 10px !important;
+    /* Equal padding */
+    border-radius: 12px !important;
+    text-align: center !important;
+    line-height: 1.4 !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* View Cart Button (Light outline style) */
+.widget_shopping_cart p.buttons a.button:not(.checkout) {
+    background-color: transparent !important;
+    color: #1d1b18 !important;
+    border: 2px solid #1d1b18 !important;
+}
+
+.widget_shopping_cart p.buttons a.button:not(.checkout):hover {
+    background-color: #1d1b18 !important;
+    color: #f7e9d0 !important;
+}
+
+/* Checkout Button (Solid dark style) */
+.widget_shopping_cart p.buttons a.button.checkout {
+    background-color: #1d1b18 !important;
+    color: #f7e9d0 !important;
+    border: 2px solid #1d1b18 !important;
+}
+
+.widget_shopping_cart p.buttons a.button.checkout:hover {
+    background-color: #3d3d3d !important;
+    border-color: #3d3d3d !important;
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
+   7. SEARCH RESULTS TEMPLATE DESIGN
+   ========================================================================== */
+.mandas-search-page-wrap {
+    padding-top: 40px !important;
+    padding-bottom: 60px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+}
+
+.mandas-search-header {
+    margin-bottom: 40px !important;
+    text-align: center !important;
+    border-bottom: 1px solid rgba(29, 27, 24, 0.1) !important;
+    padding-bottom: 30px !important;
+}
+
+.mandas-search-header .search-subtitle {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    color: #8a8a8a !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    display: block !important;
+    margin-bottom: 8px !important;
+}
+
+.mandas-search-title {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 2.75rem !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    margin: 0 0 12px 0 !important;
+    line-height: 1.2 !important;
+}
+
+.mandas-search-header .search-results-meta {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 1rem !important;
+    color: #666666 !important;
+}
+
+.mandas-search-section {
+    margin-bottom: 50px !important;
+}
+
+.mandas-search-section .search-section-title {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.85rem !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    margin-top: 0 !important;
+    margin-bottom: 25px !important;
+    position: relative !important;
+    padding-bottom: 10px !important;
+    border-bottom: 2px solid rgba(29, 27, 24, 0.05) !important;
+}
+
+.mandas-search-section .search-section-title::after {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    bottom: -2px !important;
+    width: 60px !important;
+    height: 2px !important;
+    background-color: #d41f22 !important;
+}
+
+/* Posts / Articles Grid Layout */
+.mandas-posts-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 30px !important;
+}
+
+@media (max-width: 991px) {
+    .mandas-posts-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .mandas-posts-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+}
+
+.mandas-search-post-card {
+    background-color: #ffffff !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
+    border: 1px solid transparent !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+}
+
+.mandas-search-post-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 10px 20px rgba(29, 27, 24, 0.06) !important;
+}
+
+.mandas-search-post-card .post-card-image {
+    width: 100% !important;
+    height: 200px !important;
+    overflow: hidden !important;
+    background-color: #f5f5f5 !important;
+}
+
+.mandas-search-post-card .post-card-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transition: transform 0.3s ease !important;
+}
+
+.mandas-search-post-card:hover .post-card-image img {
+    transform: scale(1.05) !important;
+}
+
+.mandas-search-post-card .post-card-body {
+    padding: 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+}
+
+.mandas-search-post-card .post-card-date {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    color: #8a8a8a !important;
+    margin-bottom: 8px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+.mandas-search-post-card .post-card-title {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.35rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    margin: 0 0 12px 0 !important;
+}
+
+.mandas-search-post-card .post-card-title a {
+    color: #1d1b18 !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+}
+
+.mandas-search-post-card .post-card-title a:hover {
+    color: #d41f22 !important;
+}
+
+.mandas-search-post-card .post-card-excerpt {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    color: #666666 !important;
+    margin-bottom: 20px !important;
+    flex-grow: 1 !important;
+}
+
+.mandas-search-post-card .post-card-excerpt p {
+    margin: 0 !important;
+    color: #666666 !important;
+}
+
+.mandas-search-post-card .post-card-read-more {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    text-decoration: none !important;
+    border-bottom: 2px solid #d41f22 !important;
+    align-self: flex-start !important;
+    padding-bottom: 2px !important;
+    transition: all 0.2s ease !important;
+}
+
+.mandas-search-post-card .post-card-read-more:hover {
+    color: #d41f22 !important;
+    border-bottom-color: #1d1b18 !important;
+    padding-left: 4px !important;
+}
+
+/* No Results Styling */
+.mandas-no-results {
+    text-align: center !important;
+    padding: 60px 20px !important;
+    max-width: 600px !important;
+    margin: 0 auto !important;
+    background-color: #ffffff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02) !important;
+}
+
+.mandas-no-results .no-results-icon {
+    color: #d41f22 !important;
+    margin-bottom: 20px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 80px !important;
+    height: 80px !important;
+    background-color: rgba(212, 31, 34, 0.05) !important;
+    border-radius: 50% !important;
+}
+
+.mandas-no-results .no-results-title {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    color: #1d1b18 !important;
+    margin: 0 0 12px 0 !important;
+}
+
+.mandas-no-results .no-results-desc {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    color: #666666 !important;
+    margin: 0 0 30px 0 !important;
+}
+
+.mandas-no-results .no-results-search-form {
+    max-width: 450px !important;
+    margin: 0 auto !important;
+}
+
+.mandas-no-results .no-results-search-form form {
+    display: flex !important;
+    gap: 10px !important;
+    width: 100% !important;
+    align-items: stretch !important;
+}
+
+.mandas-no-results .no-results-search-form form label {
+    flex-grow: 1 !important;
+    display: block !important;
+    margin: 0 !important;
+}
+
+.mandas-no-results .no-results-search-form input[type="search"],
+.mandas-no-results .no-results-search-form input[type="text"] {
+    width: 100% !important;
+    height: 100% !important;
+    background-color: #f7e9d0 !important;
+    border: 1px solid rgba(29, 27, 24, 0.15) !important;
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.95rem !important;
+    color: #1d1b18 !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    line-height: 1.2 !important;
+}
+
+.mandas-no-results .no-results-search-form input:focus {
+    outline: none !important;
+    border-color: #1d1b18 !important;
+}
+
+.mandas-no-results .no-results-search-form input[type="submit"],
+.mandas-no-results .no-results-search-form button {
+    background-color: #1d1b18 !important;
+    color: #f7e9d0 !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 12px 24px !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease !important;
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1.2 !important;
+}
+
+.mandas-no-results .no-results-search-form input[type="submit"]:hover,
+.mandas-no-results .no-results-search-form button:hover {
+    background-color: #3d3d3d !important;
+}
+
+
+.wc-block-components-button__text {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.wc-block-cart__submit-button {
+    border-radius: 12px;
+    background-color: #1d1b18;
+}
+
+/* Responsive Padding for the Search Page Wrap */
+.content_wrap.mandas-search-page-wrap {
+    padding-left: 80px !important;
+    padding-right: 80px !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 1024px) {
+    .content_wrap.mandas-search-page-wrap {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
