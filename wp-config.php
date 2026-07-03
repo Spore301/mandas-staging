@@ -21,22 +21,32 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'local' );
+define(
+    'DB_NAME',
+    getenv('MYSQL_DATABASE') ?: getenv('DB_NAME') ?: 'local'
+);
 
-/** Database username */
-define( 'DB_USER', 'root' );
+define(
+    'DB_USER',
+    getenv('MYSQL_USER') ?: getenv('DB_USER') ?: 'root'
+);
 
-/** Database password */
-define( 'DB_PASSWORD', 'root' );
+define(
+    'DB_PASSWORD',
+    getenv('MYSQL_PASSWORD') ?: getenv('DB_PASSWORD') ?: 'root'
+);
 
-/** Database hostname */
-define( 'DB_HOST', 'localhost' );
+$host = getenv('MYSQL_HOST') ?: getenv('DB_HOST') ?: 'localhost';
+$port = getenv('MYSQL_PORT');
 
-/** Database charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8' );
+if ($port) {
+    $host .= ':' . $port;
+}
 
-/** The database collate type. Don't change this if in doubt. */
-define( 'DB_COLLATE', '' );
+define('DB_HOST', $host);
+
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
 
 /**#@+
  * Authentication unique keys and salts.
@@ -88,16 +98,21 @@ $table_prefix = 'wp_';
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
 if ( ! defined( 'WP_DEBUG' ) ) {
-	define( 'WP_DEBUG', false );
+    define( 'WP_DEBUG', true );
 }
 
-define( 'WP_ENVIRONMENT_TYPE', 'local' );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );
+
+define(
+    'WP_ENVIRONMENT_TYPE',
+    getenv('WP_ENVIRONMENT_TYPE') ?: 'production'
+);
+
 /* That's all, stop editing! Happy publishing. */
 
-/** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', __DIR__ . '/' );
+    define( 'ABSPATH', __DIR__ . '/' );
 }
 
-/** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
